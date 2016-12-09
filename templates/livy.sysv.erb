@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+#       /etc/rc.d/init.d/livy-server
+#
+#       Daemonize the livy server.
+#
+# chkconfig:   2345 95 20
+# description: An Open Source REST Service for Apache Spark. \
+# processname: livy-server
+# pidfile: /var/run/livy-server.pid
+
+# Source function library.
+. /etc/init.d/functions
+
+LIVY=/opt/livy-server/bin/livy-server
+export SPARK_HOME=<%= scope.lookupvar('livy::spark_home') %>
+export HADOOP_CONF_DIR=<%= scope.lookupvar('livy::hadoop_conf_dir') %>
+
+
+start() {
+        echo -n "Starting livy-server: "
+        $LIVY start >> /var/log/livy-server.log 2>&1 > /dev/null
+        return $retcode
+}
+
+stop() {
+        echo -n "Shutting down livy-server: "
+        $LIVY stop >> /var/log/livy-server.log 2>&1 > /dev/null
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: consul {start|stop}"
+        exit 1
+        ;;
+esac
+retcode=$?
+# Don't let the [OK] get stomped on.
+echo
+exit $retcode

@@ -1,0 +1,62 @@
+<% if @conf_keystore %>
+# Use this keystore for the SSL certificate and key.
+livy.keystore = <%= @conf_keystore %>
+<% end -%>
+
+<% if @conf_keystore_password %>
+# Specify the keystore password.
+livy.keystore.password = <%= @conf_keystore_password %>
+<% end -%>
+
+<% if @conf_server_host %>
+# What host address to start the server on. By default, Livy will bind to all network interfaces.
+livy.server.host = <%= @conf_server_host %>
+<% end -%>
+
+<% if @conf_server_port %>
+# What port to start the server on.
+livy.server.port = <%= @conf_server_port %>
+<% end -%>
+
+<% if @conf_server_session_timeout %>
+# Time in milliseconds on how long Livy will wait before timing out an idle session.
+livy.server.session.timeout = <%= @conf_server_session_timeout %>
+<% end %>
+
+<% if @conf_impersonation_enabled %>
+# If livy should impersonate the requesting users when creating a new session.
+livy.impersonation.enabled = <%= @conf_impersonation_enabled %>
+<% end %>
+
+<% if @conf_jars %>
+# Comma-separated list of Livy RSC jars. By default Livy will upload jars from its installation
+# directory every time a session is started. By caching these files in HDFS, for example, startup
+# time of sessions on YARN can be reduced.
+livy.jars = <%= @conf_jars %>
+<% end %>
+
+<% if @conf_repl_jars %>
+# Comma-separated list of Livy REPL jars. By default Livy will upload jars from its installation
+# directory every time a session is started. By caching these files in HDFS, for example, startup
+# time of sessions on YARN can be reduced.
+livy.repl.jars = <%= @conf_repl_jars %>
+<% end %>
+
+<% if @conf_pyspark_archives %>
+# Location of PySpark archives. By default Livy will upload the file from SPARK_HOME, but
+# by caching the file in HDFS, startup time of PySpark sessions on YARN can be reduced.
+livy.pyspark.archives = <%= @conf_pyspark_archives %>
+<% end %>
+
+<% if @conf_sparkr_package %>
+# Location of the SparkR package. By default Livy will upload the file from SPARK_HOME, but
+# by caching the file in HDFS, startup time of R sessions on YARN can be reduced.
+livy.sparkr.package = <%= @conf_sparkr_package %>
+<% end %>
+
+<% if @conf_file_local_dir_whitelist %>
+# List of local directories from where files are allowed to be added to user sessions. By
+# default it's empty, meaning users can only reference remote URIs when starting their
+# sessions.
+livy.file.local-dir-whitelist = <%= @conf_file_local_dir_whitelist %>
+<% end %>
