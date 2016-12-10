@@ -1,5 +1,5 @@
 {
-  "name": "livy",
+  "name": "jensendw/livy",
   "version": "0.0.1",
   "author": "Daniel Jensen",
   "summary": "Module for installing and managing livy server",
